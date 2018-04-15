@@ -6,36 +6,29 @@
 //  Copyright © 2018 Vlad. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class ImageLoadProvider {
     
-    private var operationQueue = OperationQueue ()
-    let imageURL: URL
-    
-    init(imageURL: URL, completion: @escaping LoadImageCompletion) {
-        self.imageURL = imageURL
+    private lazy var operationQueue: OperationQueue = {
+        var queue = OperationQueue()
+        queue.name = "com.photo.load.operation"
         
-        let dataLoad = ImageLoadOperation(imageURL: imageURL, completionImage: completion)
+        return queue
+    }()
+    
+    private lazy var loadOperations: [IndexPath: Operation] = [IndexPath: Operation]()
+    
+    func downloadImage(at url: URL, for indexPath: IndexPath, completion: @escaping LoadImageCompletion) {
+        let dataLoad = ImageLoadOperation(imageURL: url, completionImage: completion)
+        loadOperations[indexPath] = dataLoad
+        
         operationQueue.addOperation(dataLoad)
     }
     
-    func cancel() {
-        operationQueue.cancelAllOperations()
+    func cancelDownload(at indexPath: IndexPath) {
+        loadOperations[indexPath]?.cancel()
     }
-    
-}
 
-extension ImageLoadProvider: Hashable {
-    var hashValue: Int {
-        return imageURL.hashValue
-    }
-}
-
-extension ImageLoadProvider: Equatable {
- 
-    static func ==(lhs: ImageLoadProvider, rhs: ImageLoadProvider) -> Bool {
-        return lhs.imageURL.absoluteString == rhs.imageURL.absoluteString
-    }
     
 }
