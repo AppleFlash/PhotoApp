@@ -29,7 +29,7 @@ class PhotosCollectionView: UICollectionView {
         return numberOfItems(inSection: 0) / numberOfItemsPerLine
     }
     
-    private lazy var imageLoadProviders: Set<ImageLoadProvider> = Set<ImageLoadProvider>()
+    private lazy var imageLoadProvider: ImageLoadProvider = ImageLoadProvider()
     
     weak var presenter: PhotosCollectionPresenter!
     
@@ -101,19 +101,17 @@ extension PhotosCollectionView: UICollectionViewDelegate {
             self?.insertNewPhotos(count: newCount)
         }
         
-        if let imageURL = smallImageURL(at: indexPath) {
-            let provider = ImageLoadProvider(imageURL: imageURL) { image in
-                photoCell.updateImageView(with: image, animated: photoCell.photoImage.image == nil)
-            }
-            imageLoadProviders.insert(provider)
+        guard let imageURL = smallImageURL(at: indexPath) else {
+            return
+        }
+        
+        imageLoadProvider.downloadImage(at: imageURL, for: indexPath) { image in
+            photoCell.updateImageView(with: image, animated: !photoCell.isHaveImage)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        imageLoadProviders.filter { $0.imageURL == smallImageURL(at: indexPath) }.forEach {
-            $0.cancel()
-            imageLoadProviders.remove($0)
-        }
+        imageLoadProvider.cancelDownload(at: indexPath)
     }
     
 }
