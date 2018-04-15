@@ -17,18 +17,32 @@ class ImageLoadProvider {
         return queue
     }()
     
-    private lazy var loadOperations: [IndexPath: Operation] = [IndexPath: Operation]()
+    let imageURL: URL
     
-    func downloadImage(at url: URL, for indexPath: IndexPath, completion: @escaping LoadImageCompletion) {
-        let dataLoad = ImageLoadOperation(imageURL: url, completionImage: completion)
-        loadOperations[indexPath] = dataLoad
-        
+    init(imageURL: URL, completion: @escaping LoadImageCompletion) {
+        self.imageURL = imageURL
+        let dataLoad = ImageLoadOperation(imageURL: imageURL, completionImage: completion)
         operationQueue.addOperation(dataLoad)
     }
     
-    func cancelDownload(at indexPath: IndexPath) {
-        loadOperations[indexPath]?.cancel()
+    func cancel() {
+        operationQueue.cancelAllOperations()
     }
 
+}
+
+extension ImageLoadProvider: Hashable {
+    
+    var hashValue: Int {
+        return imageURL.hashValue
+    }
+    
+}
+
+extension ImageLoadProvider: Equatable {
+    
+    static func ==(lhs: ImageLoadProvider, rhs: ImageLoadProvider) -> Bool {
+        return lhs.imageURL.absoluteString == rhs.imageURL.absoluteString
+    }
     
 }
