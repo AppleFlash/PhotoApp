@@ -14,7 +14,7 @@ protocol PhotosCollectionPresenter: class {
     var loadService: LoadPhotoService {get}
     
     func fetchNewPhotosIfNeeded(lineNumber: Int, lineCount: Int, completion: @escaping (Int) -> Void)
-    func update(_ photo: Photo)
+    
 }
 
 class PhotosCollectionView: UICollectionView {
@@ -101,15 +101,9 @@ extension PhotosCollectionView: UICollectionViewDelegate {
             self?.insertNewPhotos(count: newCount)
         }
         
-        var photo = self.photo(at: indexPath)
-        if photo.smallImage != nil {
-            photoCell.photo = photo
-        } else if let imageURL = photo.smallImageURL {
-            let provider = ImageLoadProvider(imageURL: imageURL) {  [weak self] image in
-                guard let strongSelf = self else { return }
-                photo.smallImage = image
-                strongSelf.presenter.update(photo)
-                photoCell.photo = photo
+        if let imageURL = smallImageURL(at: indexPath) {
+            let provider = ImageLoadProvider(imageURL: imageURL) { image in
+                photoCell.updateImageView(with: image, animated: photoCell.photoImage.image == nil)
             }
             imageLoadProviders.insert(provider)
         }

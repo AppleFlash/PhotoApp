@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vlad. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct Photo: Decodable {
 
@@ -18,7 +18,6 @@ struct Photo: Decodable {
     let farm: Int
     let server: String
     let secret: String
-    var smallImage: UIImage?
     
     var smallImageURL: URL? {
         return imageURL(size: "m")
@@ -39,14 +38,6 @@ struct Photo: Decodable {
     
     private func imageURL(size: String) -> URL? {
         return URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_\(size).jpg")
-    }
-    
-}
-
-extension Photo: Equatable {
-    
-    static func ==(lhs: Photo, rhs: Photo) -> Bool {
-        return lhs.id == rhs.id
     }
     
 }

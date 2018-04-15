@@ -69,12 +69,6 @@ extension PhotoListViewController: PhotosCollectionPresenter {
         })
     }
     
-    func update(_ photo: Photo) {
-        if let index = photos.index(where: { $0 == photo }) {
-            photos[index] = photo
-        }
-    }
-    
 }
 
 extension PhotoListViewController: UISearchBarDelegate {
