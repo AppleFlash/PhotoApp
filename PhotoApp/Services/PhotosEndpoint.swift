@@ -10,7 +10,7 @@ import Foundation
 
 struct PhotosEndpoint {
     
-    static let apiKey = "f68fd07a95123af98d56c39d00ab7dfa"
+    static let apiKey = "4a8dbeea5d279a33fc8ecc91d8f9ea72"
     static let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search"
     static let format = "json"
     
