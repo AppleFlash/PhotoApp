@@ -11,7 +11,6 @@ import UIKit
 protocol PhotosCollectionPresenter: class {
     
     var photos: [Photo] {get}
-    var loadService: LoadPhotoService {get}
     
     func fetchNewPhotosIfNeeded(lineNumber: Int, lineCount: Int, completion: @escaping (Int) -> Void)
     

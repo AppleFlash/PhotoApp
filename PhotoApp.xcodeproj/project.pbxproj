@@ -14,6 +14,8 @@
 		F5622E502082853800BAE9EA /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5622E4F2082853800BAE9EA /* AsyncOperation.swift */; };
 		F5622E522082855900BAE9EA /* ImageLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5622E512082855900BAE9EA /* ImageLoadOperation.swift */; };
 		F5622E5420828D4F00BAE9EA /* PhotosEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5622E5320828D4F00BAE9EA /* PhotosEndpoint.swift */; };
+		F57087E52083D8D700AD33C5 /* KeyboardShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57087E42083D8D700AD33C5 /* KeyboardShowable.swift */; };
+		F57087E72083D97A00AD33C5 /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57087E62083D97A00AD33C5 /* NoResultsView.swift */; };
 		F5832FCD20810F3000E4CD32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5832FCC20810F3000E4CD32 /* AppDelegate.swift */; };
 		F5832FCF20810F3000E4CD32 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5832FCE20810F3000E4CD32 /* PhotoListViewController.swift */; };
 		F5832FD220810F3000E4CD32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5832FD020810F3000E4CD32 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 		F5622E4F2082853800BAE9EA /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		F5622E512082855900BAE9EA /* ImageLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadOperation.swift; sourceTree = "<group>"; };
 		F5622E5320828D4F00BAE9EA /* PhotosEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEndpoint.swift; sourceTree = "<group>"; };
+		F57087E42083D8D700AD33C5 /* KeyboardShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShowable.swift; sourceTree = "<group>"; };
+		F57087E62083D97A00AD33C5 /* NoResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsView.swift; sourceTree = "<group>"; };
 		F5832FC920810F3000E4CD32 /* PhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5832FCC20810F3000E4CD32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5832FCE20810F3000E4CD32 /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 			children = (
 				F513F6E12081F98C00148C42 /* PhotosCollectionView.swift */,
 				F53617482081135200F3F195 /* PhotoCollectionViewCell.swift */,
+				F57087E62083D97A00AD33C5 /* NoResultsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -97,6 +102,14 @@
 				F5622E512082855900BAE9EA /* ImageLoadOperation.swift */,
 			);
 			path = Operations;
+			sourceTree = "<group>";
+		};
+		F57087E32083D8BF00AD33C5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F57087E42083D8D700AD33C5 /* KeyboardShowable.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F5832FC020810F3000E4CD32 = {
@@ -120,6 +133,7 @@
 		F5832FCB20810F3000E4CD32 /* PhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				F57087E32083D8BF00AD33C5 /* Helpers */,
 				F5622E4E2082852B00BAE9EA /* Operations */,
 				F5B8E3132081CF7B00FD7BC8 /* Models */,
 				F5B8E3122081CEF000FD7BC8 /* Services */,
@@ -223,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5622E5420828D4F00BAE9EA /* PhotosEndpoint.swift in Sources */,
+				F57087E72083D97A00AD33C5 /* NoResultsView.swift in Sources */,
 				F5B8E3152081D2A200FD7BC8 /* LoadPhotoService.swift in Sources */,
 				F5832FCF20810F3000E4CD32 /* PhotoListViewController.swift in Sources */,
 				F5832FCD20810F3000E4CD32 /* AppDelegate.swift in Sources */,
@@ -233,6 +248,7 @@
 				F5622E502082853800BAE9EA /* AsyncOperation.swift in Sources */,
 				F5B8E3172081F6B700FD7BC8 /* Photo.swift in Sources */,
 				F5622E522082855900BAE9EA /* ImageLoadOperation.swift in Sources */,
+				F57087E52083D8D700AD33C5 /* KeyboardShowable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

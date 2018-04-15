@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoListViewController: UIViewController {
+class PhotoListViewController: UIViewController, KeyboardShowable {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var photosCollectionView: PhotosCollectionView! {
@@ -18,11 +18,25 @@ class PhotoListViewController: UIViewController {
     }
     @IBOutlet private weak var initialFetchActivityIndicator: UIActivityIndicatorView!
     
-    private(set) lazy var loadService: LoadPhotoService = LoadPhotoService()
+    @IBOutlet private var bottomKeyboardConstraint: NSLayoutConstraint!
+    
+    private lazy var noResultsView: NoResultsView = NoResultsView()
+    private lazy var loadService: LoadPhotoService = LoadPhotoService()
     private(set) lazy var photos: [Photo] = [Photo]()
     
     private var page: Int = 0
     private let fetchDistance: Int = 3
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addKeyboardObservers { [unowned self] (keyboardInfo) in
+            self.bottomKeyboardConstraint.constant = keyboardInfo.position
+            UIView.animate(withDuration: keyboardInfo.duration, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
     
     private func searchNew(term: String) {
         page = 0
@@ -32,7 +46,9 @@ class PhotoListViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
-            
+            if photos.isEmpty {
+                strongSelf.showNoResultsView()
+            }
             strongSelf.page += 1
             strongSelf.photos = photos
             strongSelf.photosCollectionView.reloadData()
@@ -48,6 +64,19 @@ class PhotoListViewController: UIViewController {
     
     private func stopActivityIndicator() {
         initialFetchActivityIndicator.stopAnimating()
+    }
+    
+    private func showNoResultsView() {
+        view.addSubview(noResultsView)
+        noResultsView.translatesAutoresizingMaskIntoConstraints = false
+        noResultsView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        noResultsView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        noResultsView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        noResultsView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    private func hideNoResultsView() {
+        noResultsView.removeFromSuperview()
     }
 
 }
@@ -78,12 +107,18 @@ extension PhotoListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text {
-            searchNew(term: searchText)
+        guard let searchText = searchBar.text else {
+            return
+        }
+        guard loadService.lastTerm != searchText else {
+            return
         }
         
+        hideNoResultsView()
+        photos.removeAll()
+        photosCollectionView.reloadData()
+        searchNew(term: searchText)
         searchBar.resignFirstResponder()
-        searchBar.text = nil
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -91,4 +126,3 @@ extension PhotoListViewController: UISearchBarDelegate {
     }
     
 }
-
