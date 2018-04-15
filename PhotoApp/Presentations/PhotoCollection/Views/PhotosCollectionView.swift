@@ -111,6 +111,9 @@ extension PhotosCollectionView: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard !presenter.photos.isEmpty else {
+            return
+        }
         imageLoadProviders.filter { $0.imageURL == smallImageURL(at: indexPath) }.forEach {
             $0.cancel()
             imageLoadProviders.remove($0)
