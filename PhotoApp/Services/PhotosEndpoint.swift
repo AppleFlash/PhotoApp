@@ -10,13 +10,14 @@ import Foundation
 
 struct PhotosEndpoint {
     
-    static let apiKey = "4a8dbeea5d279a33fc8ecc91d8f9ea72"
-    static let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search"
-    static let format = "json"
+    private static let apiKey = "50bc4405051042ff93a2d8d89aa64c63"
+    private static let secret = "f673492d00d646d0"
+    private static let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search"
+    private static let format = "json"
     
     static func searchUrl(for term: String, resultPerPage: Int, page: Int = 0) -> URL? {
         let escapedTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let stringURL = "\(url)&api_key=\(apiKey)&text=\(escapedTerm)&format=\(format)&per_page=\(resultPerPage)&page=\(page)&nojsoncallback=?"
+        let stringURL = "\(url)&api_key=\(apiKey)&secret=\(secret)&text=\(escapedTerm)&format=\(format)&per_page=\(resultPerPage)&page=\(page)&nojsoncallback=?"
         
         guard let url = URL(string: stringURL) else {
             print("Cannot get url from \(stringURL)")
