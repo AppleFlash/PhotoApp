@@ -14,11 +14,10 @@ typealias PhotoModelsFailure = (() -> Void)
 class LoadPhotoService: NSObject {
     
     private var lastTerm: String?
-    private let resultsPerPage: Int = 50
     private var isFetchInProgress: Bool = false
     
     func initialSearchImages(for term: String,
-                             resultPerPage: Int = 50,
+                             resultPerPage: Int = 100,
                              completion: @escaping PhotoModelsCompletion,
                              failure: (() -> Void)? = nil) {
         searchImages(for: term, resultPerPage: resultPerPage, page: 0, completion: completion, failure: failure)
