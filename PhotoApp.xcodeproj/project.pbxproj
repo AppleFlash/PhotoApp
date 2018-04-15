@@ -71,8 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				F513F6E02081F97700148C42 /* Views */,
-				F5832FCE20810F3000E4CD32 /* PhotoListViewController.swift */,
 				F513F6E3208204B800148C42 /* ImageLoadProvider.swift */,
+				F5832FCE20810F3000E4CD32 /* PhotoListViewController.swift */,
 			);
 			path = PhotoCollection;
 			sourceTree = "<group>";
@@ -80,9 +80,9 @@
 		F513F6E02081F97700148C42 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F513F6E12081F98C00148C42 /* PhotosCollectionView.swift */,
-				F53617482081135200F3F195 /* PhotoCollectionViewCell.swift */,
 				F57087E62083D97A00AD33C5 /* NoResultsView.swift */,
+				F53617482081135200F3F195 /* PhotoCollectionViewCell.swift */,
+				F513F6E12081F98C00148C42 /* PhotosCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,15 +134,15 @@
 			isa = PBXGroup;
 			children = (
 				F57087E32083D8BF00AD33C5 /* Helpers */,
-				F5622E4E2082852B00BAE9EA /* Operations */,
 				F5B8E3132081CF7B00FD7BC8 /* Models */,
-				F5B8E3122081CEF000FD7BC8 /* Services */,
+				F5622E4E2082852B00BAE9EA /* Operations */,
 				F536174A208113F100F3F195 /* Presentations */,
+				F5B8E3122081CEF000FD7BC8 /* Services */,
 				F5832FCC20810F3000E4CD32 /* AppDelegate.swift */,
-				F5832FD020810F3000E4CD32 /* Main.storyboard */,
 				F5832FD320810F3000E4CD32 /* Assets.xcassets */,
-				F5832FD520810F3000E4CD32 /* LaunchScreen.storyboard */,
 				F5832FD820810F3000E4CD32 /* Info.plist */,
+				F5832FD520810F3000E4CD32 /* LaunchScreen.storyboard */,
+				F5832FD020810F3000E4CD32 /* Main.storyboard */,
 			);
 			path = PhotoApp;
 			sourceTree = "<group>";
