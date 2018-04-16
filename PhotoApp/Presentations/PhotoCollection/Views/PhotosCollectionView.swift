@@ -42,7 +42,8 @@ class PhotosCollectionView: UICollectionView {
     }
     
     private func setItemSize() {
-        let width = (bounds.width / CGFloat(numberOfItemsPerLine)) - flowLayout.minimumInteritemSpacing
+        let itemSpaces = flowLayout.minimumInteritemSpacing * (CGFloat(numberOfItemsPerLine) - 1)
+        let width = (bounds.width - itemSpaces) / CGFloat(numberOfItemsPerLine)
         let height = width
         
         flowLayout.itemSize = CGSize(width: width, height: height)
